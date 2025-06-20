@@ -1,0 +1,33 @@
+# Bytecode and compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Neovim swap/backup files
+*.swp
+*.swo
+*.swn
+
+# Virtual environments
+venv/
+env/
+
+# Project metadata
+*.egg-info/
+.eggs/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test/cache tools
+.cache/
+coverage/
+*.cover
+
+# Environment variables (if any)
+.env
+
