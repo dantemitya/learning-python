@@ -1,16 +1,11 @@
 import utils
 from time import sleep
+import nltk
+from nltk.corpus import words
 
-"""
-goal: enter some text and then get word count, character count, most common words, etc.
-to write:
-    * text parser - prepare inputted text for anaylizing
-    * word count function
-    * character count function
-    * common word counter function
-    * make the program loop (i.e. doesn't quit after one execution)
-    * make interactive menu so you can go back, exit
-"""
+# for word count
+nltk.download('words')
+english_words = set(w.lower() for w in words.words())
 
 def show_menu():
     """ show the main menu """
@@ -29,11 +24,10 @@ def show_menu():
         else:
             continue
 
-def main():
-    menu = show_menu()
-    
+def run_parser(exec_code):
+    """ runs the loop for parsing text """
     # run the text analyzer if 1 is returned
-    if menu == 1:
+    if exec_code == 1:
         utils.display("TEXT ANALYZER")
         user_input = input("Enter text to analyze: ")
 
@@ -43,11 +37,41 @@ def main():
         
         utils.display("TEXT ANALYZER")
         parsed = utils.parse(user_input)
-        print(parsed)
+        return parsed
     
     # quit if 1 not returned
     else:
         quit()
+
+def word_count(text):
+    """ use nltk corpus to count English words """
+    words = [word for word in text if word in english_words]
+    return len(words)
+
+def main():
+    # show the menu and let user choose option
+    menu = show_menu()
+    
+    while True:
+        # parse the inputted text for processing
+        parsed = run_parser(menu)
+
+        # run word count check
+        count = word_count(parsed)
+        print(f"Word count: {count}")
+        utils.hyphens()
+
+        # prompt to continue or quit
+        while True:
+            print("Would you like to analyze more text or quit?")
+            print("1. Analyze more text")
+            print("0. Quit")
+            choice = input("Choice: ")
+
+            if choice == '1':
+                break
+            else:
+                quit()
 
 if __name__ == '__main__':
     main()
