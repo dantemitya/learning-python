@@ -12,9 +12,10 @@ def menu(groceries):
         display_list_and_title(title, groceries)
 
         # user options
-        print("1. Add items to the list")
-        print("2. Remove items from the list")
-        print("3. Clear the entire list")
+        print("1. Add items to the grocery list")
+        print("2. Remove items from the grocery list")
+        print("3. Clear the entire grocery list")
+        print("4. Sort the grocery list")
         print("Q. Exit")
         utils.hyphens()
         
@@ -26,6 +27,8 @@ def menu(groceries):
             return 'remove'
         elif choice == '3':
             return 'clear'
+        elif choice == '4':
+            return 'sort'
         elif choice.lower() == 'q':
             display_list_and_title(title, groceries)
             print("Exiting...")
@@ -53,6 +56,8 @@ def parse_choice(menu_exit_code, groceries):
             remove_menu(groceries)
     elif menu_exit_code == 'clear':
         clear_list(groceries)
+    elif menu_exit_code == 'sort':
+        sort_list(groceries)
 
 def add_menu(groceries):
     """ the menu for adding items to the grocery list """
@@ -91,7 +96,7 @@ def clear_list(groceries):
     """ clear the grocery list """
     if len(groceries) == 0:
         display_list_and_title(title, groceries)
-        print("The list is already empty.")
+        print("The list is already empty.") # exit and do nothing if list is empty
         sleep(1.5)
     else:
         display_list_and_title(title, groceries)
@@ -102,16 +107,28 @@ def clear_list(groceries):
 def display_list(groceries):
     """ display the grocery list """
     if len(groceries) == 0:
-        print("Grocery list is currently empty")
+        print("Grocery list is currently empty") # exit and do nothing if list is empty
     else:
         for index, item in enumerate(groceries):
             print(f"{index + 1}.\t{item}") # output each item in the list line by line
+
+def sort_list(groceries):
+    """ sorts the list in alphabetical order """
+    if len(groceries) == 0:
+        display_list_and_title(title, groceries)
+        print("List is already empty.") # exit and do nothing if list is empty
+        sleep(1.5)
+    else:
+        groceries.sort()
+        display_list_and_title(title, groceries)
+        print("List sorted.")
+        sleep(1.5)
 
 def main():
     groceries = [] # initialize groceries list
     while True:
         menu_exit_code = menu(groceries) # get initial user choice
-        parse_choice(menu_exit_code, groceries) # do one of the 3 possible functions on the list
+        parse_choice(menu_exit_code, groceries) # do one of the 4 possible functions on the list
 
 if __name__ == '__main__':
     main()
