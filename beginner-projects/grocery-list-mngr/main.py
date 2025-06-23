@@ -30,9 +30,10 @@ def menu(groceries):
         elif choice == '4':
             return 'sort'
         elif choice.lower() == 'q':
-            display_list_and_title(title, groceries)
+            utils.clear_screen()
             print("Exiting...")
-            sleep(1.5)
+            sleep(0.75)
+            utils.clear_screen()
             quit()
         else:
             continue
@@ -49,7 +50,7 @@ def parse_choice(menu_exit_code, groceries):
         add_menu(groceries)
     elif menu_exit_code == 'remove':
         if len(groceries) == 0:
-            display_list_and_title(title, groceries)
+            utils.clear_screen()
             print("The list is already empty.")
             sleep(1.5)
         else:
@@ -66,11 +67,21 @@ def add_menu(groceries):
         
         # add items to the list
         print("Enter 'Q' when you are finished")
-        item = input("Add to list: ")
-        if item.lower() == 'q':
+        item_name = input("Add to list: ")
+        if item_name.lower() == 'q':
             break
         else:
-            groceries.append(item.capitalize())
+            while True:
+                try:
+                    display_list_and_title(title, groceries)
+                    print(f"Add to list: {item_name.capitalize()}")
+
+                    quantity = int(input("Quantity: ")) # let the user add a quantity
+                    item = (item_name.capitalize(), quantity) # make it a tuple of (item, qnty)
+                    groceries.append(item)
+                    break
+                except ValueError: # except value error in case the user enters a non-number
+                    continue
 
 def remove_menu(groceries):
     """ the menu for removing items from the grocery list """
@@ -82,24 +93,25 @@ def remove_menu(groceries):
         item_index = input("Item to remove from list (index): ")
         if item_index.lower() == 'q':
             break
-        elif len(groceries) == 0:
-            print("The list is now empty. Going back to the menu...")
-            sleep(1.5)
-            break
-        else:
+        elif item_index.lower() != 'q':
             try:
                 del groceries[int(item_index) - 1]
             except IndexError: # catch index error so the program doesn't crash
                 continue
+            if len(groceries) == 0:
+                utils.clear_screen()
+                print("The list is now empty. Going back to the menu...")
+                sleep(1.5)
+                break
 
 def clear_list(groceries):
     """ clear the grocery list """
     if len(groceries) == 0:
-        display_list_and_title(title, groceries)
+        utils.clear_screen()
         print("The list is already empty.") # exit and do nothing if list is empty
         sleep(1.5)
     else:
-        display_list_and_title(title, groceries)
+        utils.clear_screen()
         print("Clearing grocery list...")
         sleep(1.5)
         groceries.clear()
@@ -107,20 +119,23 @@ def clear_list(groceries):
 def display_list(groceries):
     """ display the grocery list """
     if len(groceries) == 0:
+        utils.clear_screen()
         print("Grocery list is currently empty") # exit and do nothing if list is empty
     else:
+        print("#\tName\t\tQuantity")
+        print()
         for index, item in enumerate(groceries):
-            print(f"{index + 1}.\t{item}") # output each item in the list line by line
+            print(f"{index + 1}.\t{item[0]}\t\t{item[1]}") # output each item in the list line by line
 
 def sort_list(groceries):
     """ sorts the list in alphabetical order """
     if len(groceries) == 0:
-        display_list_and_title(title, groceries)
-        print("List is already empty.") # exit and do nothing if list is empty
+        utils.clear_screen()
+        print("The list is already empty.") # exit and do nothing if list is empty
         sleep(1.5)
     else:
+        utils.clear_screen()
         groceries.sort()
-        display_list_and_title(title, groceries)
         print("List sorted.")
         sleep(1.5)
 
