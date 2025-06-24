@@ -1,0 +1,32 @@
+# USEFUL METHODS THAT CAN BE REUSED IN VARIOUS SCRIPTS
+import csv
+
+def clear_screen(length=100):
+    """ clears the console screen using new lines. default length is 100 """
+    print("\n"*length)
+
+def hyphens(length=40):
+    """ prints a line of hyphens for formatting. default length is 40 """
+    print("-"*length)
+
+def display(title):
+    """ displays the title of the program 'nicely' """
+    clear_screen()
+    print(title.upper())
+    hyphens()
+
+def get_csv(filename):
+    """ get the csv and its header name for storing in a variable """
+    with open(filename, newline='') as file:
+        reader = csv.DictReader(file)
+        headers = reader.fieldnames # header names
+        return headers, list(reader) 
+
+def show_csv(headers, data):
+    """ read a csv file """
+    for row in data:
+        for header in headers:
+            print(row[header], end='\t\t')
+        print()
+
+
