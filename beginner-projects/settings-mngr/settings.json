@@ -1,0 +1,24 @@
+{
+  "app": {
+    "name": "MyApp",
+    "version": "1.0.0",
+    "debug_mode": true,
+    "language": "en"
+  },
+  "user": {
+    "username": "guest",
+    "theme": "dark",
+    "notifications": true,
+    "volume": 75
+  },
+  "paths": {
+    "data_dir": "./data",
+    "log_file": "./logs/app.log"
+  },
+  "features": {
+    "auto_save": true,
+    "auto_update": false,
+    "beta_features": []
+  }
+}
+
