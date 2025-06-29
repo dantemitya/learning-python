@@ -9,16 +9,16 @@
     "username": "guest",
     "theme": "dark",
     "notifications": true,
-    "volume": 75
+    "volume": "50",
+    "language": "de"
   },
   "paths": {
     "data_dir": "./data",
     "log_file": "./logs/app.log"
   },
   "features": {
-    "auto_save": true,
+    "auto_save": "False",
     "auto_update": false,
     "beta_features": []
   }
 }
-
