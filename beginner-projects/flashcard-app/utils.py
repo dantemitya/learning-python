@@ -29,7 +29,7 @@ def show_menu():
         hyphens()
         
         # loop to get user_choice and catch bad inputs
-        user_choice = input("Choice (1/2): ")
+        user_choice = input("Choice (1/2/q): ")
         if user_choice == '1':
             return 'review'
         elif user_choice == '2':
@@ -37,7 +37,7 @@ def show_menu():
         elif user_choice.lower() == 'q':
             print()
             print("Exiting...")
-            sleep(1.5)
+            sleep(0.75)
             quit()
         else:
             continue

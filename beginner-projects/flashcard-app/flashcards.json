@@ -1,6 +1,47 @@
 [
     {
-        "front": "front",
-        "back": "back"
+        "front": "template",
+        "back": "template",
+        "id": "0",
+        "interval": "365",
+        "state": "learned",
+        "reviews": "0",
+        "lapses": "0"
+    },
+    {
+        "front": "la casa",
+        "back": "house",
+        "id": 1,
+        "interval": "16",
+        "state": "learned",
+        "reviews": "4",
+        "lapses": "0"
+    },
+    {
+        "front": "la pantaya",
+        "back": "screen",
+        "id": 2,
+        "interval": "4",
+        "state": "learning",
+        "reviews": "2",
+        "lapses": "0"
+    },
+    {
+        "front": "el toro",
+        "back": "bull",
+        "id": 3,
+        "interval": "1",
+        "state": "learning",
+        "reviews": "0",
+        "lapses": "2"
+    },
+    {
+        "front": "el perro",
+        "back": "dog",
+        "id": 4,
+        "interval": "4",
+        "state": "learning",
+        "reviews": "2",
+        "lapses": "0"
     }
 ]
