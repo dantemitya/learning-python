@@ -27,14 +27,14 @@ def menu():
         print("1. Add two matrices")
         print("2. Subtract two matrices")
         print("3. Multiply two matrices")
-        print("4. Get det, inverse, trace, transpose")
-        print("5. Get eigenvalues and eigenvectors")
+        print("4. Get det, inverse, eigenvalues, etc.")
+        print("q. Quit")
         hyphens()
         
         while True:
-            print("Enter 1/2/3/4/5")
+            print("Enter 1/2/3/4/q")
             choice = input("> ")
-            if choice not in ['1','2','3','4','5']:
+            if choice.lower() not in ['1','2','3','4','q']:
                 break
             else:
                 return choice
@@ -51,14 +51,14 @@ def parseChoice(choice):
     elif choice == '4':
         infoMode()
     else:
-        eigenMode()
+        quit()
 
 def defMatrix(shape):
     """ inits a zero matrix with the specified shape """
     M = np.zeros((shape[0],shape[1]))
     return M
 
-# TODO: finish writing this func
+
 def getElements(matrix):
     """ get elements for a matrix """
     for rowindex,rowelement in enumerate(matrix):
@@ -68,7 +68,6 @@ def getElements(matrix):
             print()
     
 
-# TODO: do actual addition under the else condition part
 def additionMode():
     """ add matrices mode """
     while True:
@@ -98,38 +97,160 @@ def additionMode():
 
             result = np.add(matrix1,matrix2)
 
+            clear_screen()
+            hyphens()
+            print(f"\nMatrix 1:\n{matrix1}\n")
+            print(f"Matrix 2:\n{matrix2}\n")
             hyphens()
             print(f"\nResult of addition:\n{result}\n")
             hyphens()
-            sleep(4)
+            
+            print("Enter 'm' to go back to the menu")
+            print("Enter any other key to continue")
+            choice = input("> ")
+            if choice.lower() == 'm':
+                break
+            else:
+                continue
 
 
-# TODO: finish writing this func
 def subtractionMode():
     """ subtract matrices mode """
-    display("MATRIX SUBTRACTION")
-    pass
+    while True:
+        display("MATRIX SUBTRACTION")
+        
+        # get info for first matrix
+        print("Matrix 1")
+        shape1 = getShape()
+        matrix1 = defMatrix(shape1)
+        getElements(matrix1)
+        print(f"Matrix 1:\n{matrix1}")
+        
+        # get info for second matrix
+        hyphens()
+        print("\nMatrix 2")
+        shape2 = getShape()
 
+        if shape1 != shape2:
+            print("\nError: Matrix dimensions must be the same.")
+            print("Please try again.\n")
+            sleep(3)
+            continue
+        else:
+            matrix2 = defMatrix(shape2)
+            getElements(matrix2)
+            print(f"Matrix 2:\n{matrix2}")
 
-# TODO: finish writing this func
+            result = np.subtract(matrix1,matrix2)
+            
+            clear_screen()
+            hyphens()
+            print(f"\nMatrix 1:\n{matrix1}\n")
+            print(f"Matrix 2:\n{matrix2}\n")
+            hyphens()
+            print(f"\nResult of subtraction:\n{result}\n")
+            hyphens()
+            
+            print("Enter 'm' to go back to the menu")
+            print("Enter any other key to continue")
+            choice = input("> ")
+            if choice.lower() == 'm':
+                break
+            else:
+                continue
+        
+
 def multMode():
     """ multiply matrices mode """
-    display("MATRIX MULTIPLICATION")
-    pass
+    while True:
+        display("MATRIX MULTIPLICATION")
+        
+        # get info for first matrix
+        print("Matrix 1")
+        shape1 = getShape()
+        matrix1 = defMatrix(shape1)
+        getElements(matrix1)
+        print(f"Matrix 1:\n{matrix1}")
+        
+        # get info for second matrix
+        hyphens()
+        print("\nMatrix 2")
+        shape2 = getShape()
+
+        if shape1[1] != shape2[0]:
+            print("\nError: Matrix dimensions must be the same.")
+            print("Please try again.\n")
+            sleep(3)
+            continue
+        else:
+            matrix2 = defMatrix(shape2)
+            getElements(matrix2)
+            print(f"Matrix 2:\n{matrix2}")
+
+            result = np.matmul(matrix1,matrix2)
+            
+            clear_screen()
+            hyphens()
+            print(f"\nMatrix 1:\n{matrix1}\n")
+            print(f"Matrix 2:\n{matrix2}\n")
+            hyphens()
+            print(f"\nResult of multiplication:\n{result}\n")
+            hyphens()
+            
+            print("Enter 'm' to go back to the menu")
+            print("Enter any other key to continue")
+            choice = input("> ")
+            if choice.lower() == 'm':
+                break
+            else:
+                continue
 
 
-# TODO: finish writing this func
 def infoMode():
     """ get matrix info """
-    display("MATRIX INFO")
-    pass
+    while True:
+        display("MATRIX INFO")
+        print("Define matrix")
+        shape = getShape()
+        if shape[0] != shape[1]:
+            print("Error: must be a square matrix")
+            print("Please try again")
+            continue
+        else:
+            matrix = defMatrix(shape)
+            getElements(matrix)
+            clear_screen()
+            print(f"Info for the matrix:\n{matrix}")
+            hyphens()
+            
+            # determinant
+            det = np.linalg.det(matrix)
+            print(f"\nDet: {det:.4f}\n")
+            
+            # inverse
+            print(f"Inverse:\n{np.linalg.inv(matrix)}\n")
 
+            # trace
+            print(f"Trace: {np.trace(matrix):.4f}\n")
+            
+            # norm
+            print(f"Norm: {np.linalg.norm(matrix):.4f}\n")
 
-# TODO: finish writing this func
-def eigenMode():
-    """ get eigenvalues and eigenvectors """
-    display("EIGENVALUES & EIGENVECTORS")
-    pass
+            # eigenvalues and eigenvectors
+            eigen = np.linalg.eig(matrix)
+            print(f"Eigenvalues:\n{eigen[0]}\n\nEigenvectors:\n{eigen[1]}\n")
+
+            # transpose
+            print(f"Transpose:\n{np.linalg.matrix_transpose(matrix)}\n")
+
+            hyphens()
+            print("Enter 'm' to go back to the menu")
+            print("Enter any other key to continue")
+            choice = input("> ")
+            if choice.lower() == 'm':
+                break
+            else:
+                continue
 
 
 def getShape():

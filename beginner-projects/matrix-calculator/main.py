@@ -3,8 +3,9 @@ import utils
 
 
 def main():
-    choice = utils.menu()
-    utils.parseChoice(choice)
+    while True:
+        choice = utils.menu()
+        utils.parseChoice(choice)
 
 
 if __name__ == '__main__':
